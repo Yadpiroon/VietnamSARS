@@ -288,7 +288,7 @@ gxy
 
 #Final plot fp 1####
 graphH <- read_excel("graphH.xlsx", col_types = c("date", "numeric", "numeric"))
-head(graphH)
+View(graphH)
 
 fp1 <- graphH %>%
   mutate(Date = as.Date(Date)) %>%
@@ -296,8 +296,8 @@ fp1 <- graphH %>%
   geom_bar(aes(x = Date, y = case * 6 / 1845400, fill = "Weekly new case"), stat = "identity", color = "#a9dde1") + 
   geom_line(aes(x = Date, y = value, color = "SARS-CoV2 Concentration")) + 
   geom_point(aes(x = Date, y = value, color = "SARS-CoV2 Concentration"), size = 1, shape = 21) + 
-  geom_vline(xintercept = as.Date("2021-10-06"), linetype = "dashed", color = "black") + # Add dashed line
-  annotate("text", x = as.Date("2021-11-20"), y = 6, label = "4th wave", vjust = -0.5, color = "black") + # Add label
+  geom_vline(xintercept = as.Date("2022-03-18"), linetype = "dashed", color = "black") + # Add dashed line
+  annotate("text", x = as.Date("2022-08-01"), y = 6, label = "6th wave: 2022-03-18", vjust = -0.5, color = "black") + # Add label
   geom_vline(xintercept = as.Date("2022-02-16"), linetype = "dashed", color = "red") + # Add dashed line
   annotate("text", x = as.Date("2022-08-01"), y = 6.5, label = "Peak Concentration: 2022-02-16", vjust = -0.5, color = "red") + # Add label
   geom_vline(xintercept = as.Date("2022-03-23"), linetype = "dashed", color = "blue") + # Add dashed line
@@ -341,7 +341,7 @@ save_plot("fp1.jpeg", fp1)
 library(readxl)
 graphw <- read_excel("graphw.xlsx", col_types = c("date", 
                                                   "numeric", "numeric"))
-head(graphw)
+View(graphw)
 
 fp2 <- graphw %>%
   mutate(Date = as.Date(Date)) %>%
@@ -349,8 +349,8 @@ fp2 <- graphw %>%
   geom_bar(mapping = aes(x = Date, y = case * 6 / 1845400), stat = "identity", color = "#a9dde1", fill = "#a9dde1") + 
   geom_line(mapping = aes(x = Date, y = value), color = "#f2c0bc") + 
   geom_point(mapping = aes(x = Date, y = value), size = 1, shape = 21, fill = "#f2c0bc", color = "#f2c0bc") + 
-  geom_vline(xintercept = as.Date("2021-10-06"), linetype = "dashed", color = "black") + # Add dashed line
-  annotate("text", x = as.Date("2021-11-20"), y = 6, label = "4th wave", vjust = -0.5, color = "black") + # Add label
+  geom_vline(xintercept = as.Date("2022-03-18"), linetype = "dashed", color = "black") + # Add dashed line
+  annotate("text", x = as.Date("2022-07-26"), y = 6, label = "6th wave: 2022-03-18", vjust = -0.5, color = "black") + # Add label
   geom_vline(xintercept = as.Date("2022-03-02"), linetype = "dashed", color = "red") + # Add dashed line
   annotate("text", x = as.Date("2022-08-01"), y = 6.5, label = "Peak Concentration: 2022-03-02", vjust = -0.5, color = "red") + # Add label
   geom_vline(xintercept = as.Date("2022-03-23"), linetype = "dashed", color = "blue") + # Add dashed line
@@ -398,8 +398,8 @@ fp3 <- graphr %>%
   geom_bar(aes(x = Date, y = case * 6 / 1845400, fill = "Weekly new case"), stat = "identity", color = "#a9dde1") + 
   geom_line(aes(x = Date, y = value, color = "SARS-CoV2 Concentration")) + 
   geom_point(aes(x = Date, y = value, color = "SARS-CoV2 Concentration"), size = 1, shape = 21) + 
-  geom_vline(xintercept = as.Date("2021-10-06"), linetype = "dashed", color = "black") + 
-  annotate("text", x = as.Date("2021-11-20"), y = 6, label = "4th wave", vjust = -0.5, color = "black") + 
+  geom_vline(xintercept = as.Date("2022-03-18"), linetype = "dashed", color = "black") + 
+  annotate("text", x = as.Date("2022-07-26"), y = 6, label = "6th wave: 2022-03-18", vjust = -0.5, color = "black") + 
   geom_vline(xintercept = as.Date("2022-02-23"), linetype = "dashed", color = "red") + 
   annotate("text", x = as.Date("2022-08-01"), y = 6.5, label = "Peak Concentration: 2022-02-23", vjust = -0.5, color = "red") + 
   geom_vline(xintercept = as.Date("2022-03-23"), linetype = "dashed", color = "blue") + 
@@ -438,7 +438,7 @@ fp3 <- graphr %>%
   ) 
 
 fp3
-
+save_plot("fp3.jpeg", fp3)
 
 ###Fig 2AC####
 
@@ -601,14 +601,15 @@ ggsave(file="fig3.jpeg", fig3, width= 190, height = 120, units = "mm", dpi=600)
 
 ######corr fig3ab####
 ####corr plot ####
+
 library(readr)
 corr3site <- read_csv("corr3site.csv", col_types = cols(avg_rainfall = col_number(), 
-                                                        temp = col_number(), humidity = col_number(), 
-                                                        case = col_number(), SARS_hospital = col_number(), 
-                                                        PMMoV_hospital = col_number(), SARS_river = col_number(), 
-                                                        PMMoV_river = col_number(), SARS_wwtp = col_number(), 
-                                                        PMMoV_wwtp = col_number()))
+                                                        temp = col_number(), case = col_number(), 
+                                                        SARS_hospital = col_number(), PMMoV_hospital = col_number(), 
+                                                        SARS_river = col_number(), PMMoV_river = col_number(), 
+                                                        SARS_wwtp = col_number(), PMMoV_wwtp = col_number()))
 View(corr3site)
+
 attach(corr3site)
 
 p.mat <- cor_pmat(corr3site) #correlation matrix with p-values
@@ -672,7 +673,90 @@ ggsave(file="cor.plot.labsazz.jpeg", cor.plot.labs,
        width= 90, height = 90, units = "mm", dpi=600)
 dev.off()
 
-F3AB <- plot_grid(fig3, cor.plot.labs, ncol = 1,
+F3AB <- plot_grid(fig3, cor.plot.labs, ncol = 1, 
+                  labels = c("a", "b"), label_size = 10)
+F3AB
+
+ggsave(file="F3AB.jpeg", F3AB, width= 180, height = 200, units = "mm", dpi=600)
+dev.off()
+
+###################################################### try 24 n omi####
+
+library(readr)
+corr_omi <- read_csv("corr_omi.csv", col_types = cols(sarcov = col_number(), 
+                                                      case = col_number(), Omi_339m = col_number(), 
+                                                      Omi_339w = col_number()))
+View(corr_omi)
+
+attach(corr_omi)
+
+p.mat <- cor_pmat(corr_omi) #correlation matrix with p-values
+head(p.mat)
+p.mat
+m <- cor(corr_omi) 
+m
+
+#sig
+# new corr plot
+library(dplyr)
+library(ggcorrplot)
+library(ggplot2)
+library(reshape2)
+
+corr <- round(cor(corr_omi), 1)
+
+p.df <- as.data.frame(ggcorrplot::cor_pmat(corr_omi))
+
+labs.function = function(x){
+  case_when(x >= 0.05 ~ "",
+            x < 0.05 & x >= 0.01 ~ "*",
+            x < 0.01 & x >= 0.001 ~ "**",
+            x < 0.001 ~ "***")
+}
+
+p.labs = p.df %>%
+  mutate_all(labs.function)
+
+p.labs$Var1 = as.factor(rownames(p.labs))
+p.labs = melt(p.labs, id.vars = "Var1", variable.name = "Var2", value.name = "lab")
+
+cor_plot = ggcorrplot(corr, hc.order = F, type = "lower",
+                      lab = T, ggtheme = ggplot2::theme_gray, colors = c("#F4EEEE", "#FFE6E6", "#E1AFD1")) +
+  theme(legend.text = element_text(color = "black", family = "Arial", size = 10), #detail site label
+        legend.title = element_text(color = "black", family = "Arial", size = 10, face = "bold"), #site detail label
+        axis.text = element_text(color = "black", family = "Arial", size = 2),
+        panel.background = element_rect(fill = "grey95", colour = NA),
+        panel.grid.major = element_line(colour = "white", size = 0.2))
+
+p.labs$in.df = ifelse(is.na(match(paste0(p.labs$Var1, p.labs$Var2),
+                                  paste0(cor_plot[["data"]]$Var1, cor_plot[["data"]]$Var2))),
+                      "No", "Yes")
+
+p.labs = select(filter(p.labs, in.df == "Yes"), -in.df)
+
+cor.plot.labs2 = cor_plot +
+  geom_text(aes(x = p.labs$Var1,
+                y = p.labs$Var2),
+            label = p.labs$lab,
+            nudge_y = 0.25,
+            size = 5)
+
+cor.plot.labs2
+
+ggsave(file="cor.plot.labsazz.jpeg", cor.plot.labs2,
+       width= 90, height = 90, units = "mm", dpi=600)
+dev.off()
+
+#n24 not enough to sig with envi next try to incclude sarc and case 
+#but no sar and case sig
+
+###################################################### add in fig 3####
+
+ggsave(file="cor.plot.labsazz.jpeg", cor.plot.labs,
+       width= 90, height = 90, units = "mm", dpi=600)
+dev.off()
+
+F3AB <- plot_grid(fig3, cor.plot.labs, ncol = 1, 
                   labels = c("a", "b"), label_size = 10)
 F3AB
 
@@ -971,3 +1055,98 @@ fig4AB <- plot_grid(r1, r4, ncol = 2, rel_widths = c(1, 2),
 
 ggsave(file="fig4AB.jpeg", fig4AB, width= 180, height = 100, units = "mm", dpi=600)
 
+###Set graph figure time series and ccf####
+
+#px1
+graphH <- read_excel("graphH.xlsx", col_types = c("date", "numeric", "numeric"))
+View(graphH)
+
+fp1 <- graphH %>%
+  mutate(Date = as.Date(Date)) %>%
+  ggplot() + 
+  geom_bar(aes(x = Date, y = case * 6 / 1845400, fill = "Weekly new case"), stat = "identity", color = "#a9dde1") + 
+  geom_line(aes(x = Date, y = value, color = "SARS-CoV2 Concentration")) + 
+  geom_point(aes(x = Date, y = value, color = "SARS-CoV2 Concentration"), size = 1, shape = 21) + 
+  geom_vline(xintercept = as.Date("2022-03-18"), linetype = "dashed", color = "black") + # Add dashed line
+  annotate("text", x = as.Date("2022-12-01"), y = 6, label = "6th wave: 2022-03-18", vjust = -0.5, color = "black") + # Add label
+  geom_vline(xintercept = as.Date("2022-02-16"), linetype = "dashed", color = "red") + # Add dashed line
+  annotate("text", x = as.Date("2022-12-01"), y = 6.5, label = "Peak Concentration: 2022-02-16", vjust = -0.5, color = "red") + # Add label
+  geom_vline(xintercept = as.Date("2022-03-23"), linetype = "dashed", color = "blue") + # Add dashed line
+  annotate("text", x = as.Date("2022-12-01"), y = 5, label = "Peak case: 2022-03-23", vjust = -0.5, color = "blue") + # Add label
+  scale_x_date(
+    name = "Month/Year", 
+    date_breaks = "2 month",
+    date_labels = "%m/%y",
+    limits = as.Date(c("2021-10-01", "2023-10-31")) # Set limits for the x-axis
+  ) +
+  scale_y_continuous(
+    name = expression("SARS-CoV2 Concentration" *  (Log[10] * " copies/L")), 
+    sec.axis = sec_axis(~ . * 1845400 / 6, name = "Weekly new case"), limits = c(0, 7)) + 
+  scale_fill_manual(values = c("Weekly new case" = "#a9dde1")) +
+  scale_color_manual(values = c("SARS-CoV2 Concentration" = "#f2c0bc")) +
+  theme_bw() + 
+  labs(
+    title = "Hospital",
+    x = "Date",
+    fill = "Legend",
+    color = "Legend"
+  ) + labs(fill = " ") +
+  theme(
+    axis.title.x = element_text(color = "black", size = 7, face = "bold"),
+    axis.title.y = element_text(color = "black", size = 7, face = "bold"),
+    legend.title = element_text(color = "black", size = 7, face = "bold"),
+    legend.position = "top",
+    plot.margin = margin(0.5, 0.5, 0.5, 0.5, "mm"),
+    axis.text.x = element_text(color = "black", size = 7),
+    axis.text.y = element_text(color = "black", size = 7),
+    panel.background = element_rect(fill = "white", colour = NA),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_rect(color = "black", fill = NA, size = 0.5)
+  ) 
+
+fp1
+
+ggsave(file="fp1.jpeg", fp1, width= 180, height = 100, units = "mm", dpi=600)
+
+#px2
+
+# Find the row(s) with the highest correlation across all sites
+peak_correlation <- all_sites_correlations %>%
+  ungroup() %>%
+  arrange(desc(correlation)) %>%
+  slice(1)
+peak_correlation
+
+# Plotting the results with the peak correlation highlighted
+pastel_colors <- c("Hospital" = "#26547c", "River" = "#ef476f", "WWTP" = "#ffd166")
+
+r4 <- ggplot(all_sites_correlations, aes(x = lag, y = correlation, color = site)) +
+  geom_line() + 
+  geom_point() +
+  geom_point(data = peak_correlation, aes(x = lag, y = correlation), color = "red", size = 0.5) +  # Highlight peak
+  geom_vline(xintercept = 4, linetype = "dashed") +
+  scale_y_continuous(limits = c(min(all_sites_correlations$correlation), max(all_sites_correlations$correlation))) +  # Dynamically set y-axis limits
+  scale_color_manual(values = pastel_colors) +
+  labs(x = "Lag time (weeks)", y = "Pearson's Correlation Coefficient", title = "Time-lagged Cross-Correlation Across Sites") +
+  theme_minimal() +
+  theme(axis.title.x = element_text(color = "black", size = 7, face = "bold"),
+        axis.title.y = element_text(color = "black", size = 7),
+        legend.text = element_text(color = "black", size = 7),
+        legend.title = element_text(color = "black", size = 7, face = "bold"),
+        plot.margin = margin(5, 5, 5, 5, "mm"),
+        axis.text.x = element_text(color = "black", size = 7),
+        axis.text.y = element_text(color = "black", size = 7),
+        panel.background = element_rect(fill = "white", colour = NA),
+        panel.grid.major = element_line(colour = "grey", size = 0.2, linetype = "dashed"),
+        panel.border = element_rect(colour = "black", fill=NA, size=0.5))
+
+r4
+ggsave(file="r4.jpeg", r4, width= 180, height = 100, units = "mm", dpi=600)
+
+###Fig 2AC####
+
+ccf_ts <- plot_grid(fp1, r4, ncol = 1,
+                    labels = c("a", "b"), label_size = 10)
+
+ggsave(file="ccf_ts.jpeg", ccf_ts, width= 160, height = 180, units = "mm", dpi=600)
