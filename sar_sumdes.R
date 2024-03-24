@@ -18,9 +18,8 @@ library(base)
 
 library(readr)
 sardata_all <- read_csv("sardata_all.csv", 
-                        col_types = cols(date = col_character(), 
-                                         Rainfall = col_number(), sarcov = col_number(), 
-                                         PMMoV = col_number()))
+                        col_types = cols(Rainfall = col_number(), 
+                                         temp = col_number(), case = col_number()))
 head(sardata_all)
 
 ########Site cen test#####################
@@ -75,6 +74,21 @@ summary(River$PMMoV)
 sd(River$PMMoV)
 shapiro.test(River$PMMoV)
 
+#rainfall
+summary(Hospital$Rainfall)
+sd(Hospital$Rainfall)
+shapiro.test(Hospital$Rainfall)
+
+#temp
+summary(Hospital$temp)
+sd(Hospital$temp)
+shapiro.test(Hospital$temp)
+
+#case
+summary(Hospital$case)
+sd(Hospital$case)
+shapiro.test(Hospital$case)
+
 # Site different p-value > 0.05
 one.way.anova_event <- aov(sardata_all$sarcov ~ sardata_all$site, data = sardata_all)
 summary(one.way.anova_event)
@@ -84,18 +98,14 @@ one.way.anova_event <- aov(sardata_all$PMMoV ~ sardata_all$site, data = sardata_
 summary(one.way.anova_event)
 TukeyHSD(one.way.anova_event)
 
-
-
-
-
 ######### Descriptive statistics size # season sum #############
 
+
 library(readr)
-seasonVT <- read_csv("seasonVT.csv", 
-                        col_types = cols(date = col_character(), 
-                                         Rainfall = col_number(), sarcov = col_number(), 
-                                         PMMoV = col_number()))
+seasonVT <- read_csv("seasonVT.csv", col_types = cols(Rainfall = col_number(), 
+                                                      temp = col_number(), case = col_number()))
 View(seasonVT)
+
 
 ########season cen test#####################
 #sar
@@ -139,6 +149,36 @@ summary(Wet$PMMoV)
 sd(Wet$PMMoV)
 shapiro.test(Wet$PMMoV)
 
+#rainfall
+
+summary(Dry$Rainfall)
+sd(Dry$Rainfall)
+shapiro.test(Dry$Rainfall)
+
+summary(Wet$Rainfall)
+sd(Wet$Rainfall)
+shapiro.test(Wet$Rainfall)
+
+#temp
+
+summary(Dry$temp)
+sd(Dry$temp)
+shapiro.test(Dry$temp)
+
+summary(Wet$temp)
+sd(Wet$temp)
+shapiro.test(Wet$temp)
+
+#case
+
+summary(Dry$case)
+sd(Dry$case)
+shapiro.test(Dry$case)
+
+summary(Wet$case)
+sd(Wet$case)
+shapiro.test(Wet$case)
+
 
 # Site different p-value > 0.05
 one.way.anova_event <- aov(seasonVT$sarcov ~ seasonVT$Season, data = seasonVT)
@@ -162,8 +202,126 @@ t.test(Dry$PMMoV, Wet$PMMoV, paired = F, alternative="greater")
 t.test(Dry$PMMoV, Wet$PMMoV, paired = F, alternative="less")
 
 
+#3.1.2 Two Sample t-test (unpaired)
+t.test(Dry$Rainfall, Wet$Rainfall)
+#one tail test
+t.test(Dry$Rainfall, Wet$Rainfall, paired = F, alternative="greater")
+t.test(Dry$Rainfall, Wet$Rainfall, paired = F, alternative="less")
+
+#3.1.2 Two Sample t-test (unpaired)
+t.test(Dry$temp, Wet$temp)
+#one tail test
+t.test(Dry$temp, Wet$temp, paired = F, alternative="greater")
+t.test(Dry$temp, Wet$temp, paired = F, alternative="less")
+
+#3.1.2 Two Sample t-test (unpaired)
+t.test(Dry$case, Wet$case)
+#one tail test
+t.test(Dry$case, Wet$case, paired = F, alternative="greater")
+t.test(Dry$case, Wet$case, paired = F, alternative="less")
+
+#3.1.2 Two Sample t-test (unpaired)
+t.test(Dry$sarcov, Dry$PMMoV)
+#one tail test
+t.test(Dry$sarcov, Dry$PMMoV, paired = F, alternative="greater")
+t.test(Dry$sarcov, Dry$PMMoV, paired = F, alternative="less")
+
+#3.1.2 Two Sample t-test (unpaired)
+t.test(Wet$sarcov, Wet$PMMoV)
+#one tail test
+t.test(Wet$sarcov, Wet$PMMoV, paired = F, alternative="greater")
+t.test(Wet$sarcov, Wet$PMMoV, paired = F, alternative="less")
+
+##########################################case 2 year####
+
+graphH <- read_excel("graphH.xlsx", col_types = c("date", "numeric", "numeric"))
+View(graphH)
+
+library(readxl)
+yearVT <- read_excel("yearVT.xlsx", col_types = c("numeric", 
+                                                  "numeric", "text", "numeric", "text", 
+                                                  "numeric", "numeric", "text"))
+View(yearVT)
+
+Hospital <- yearVT[1:105, ]
+View(Hospital)
+hstyrs <- Hospital[1:52, ]
+hndyrs <- Hospital[53:105, ]
+
+WWTP <- yearVT[106:210, ]
+wstyrs <- WWTP[1:52, ]
+wndyrs <- WWTP[53:105, ]
+
+River <- yearVT[211:315, ]
+rstyrs <- River[1:52, ]
+rndyrs <- River[53:105, ]
+
+#h1
+summary(hstyrs$sarcov)
+sd(hstyrs$sarcov)
+shapiro.test(hstyrs$sarcov)
+
+#h2
+summary(hndyrs$sarcov)
+sd(hndyrs$sarcov)
+shapiro.test(hndyrs$sarcov)
+
+#w1
+summary(wstyrs$sarcov)
+sd(wstyrs$sarcov)
+shapiro.test(wstyrs$sarcov)
+
+#w2
+summary(wstyrs$sarcov)
+sd(wndyrs$sarcov)
+shapiro.test(wndyrs$sarcov)
+
+#r1
+summary(rstyrs$sarcov)
+sd(rstyrs$sarcov)
+shapiro.test(rstyrs$sarcov)
+
+#r2
+summary(rndyrs$sarcov)
+sd(rndyrs$sarcov)
+shapiro.test(rndyrs$sarcov)
+
+#st =3.981
+summary(styrs$value)
+sd(styrs$value)
+shapiro.test(styrs$value)
+
+#nd = 3.25
+summary(ndyrs$value)
+sd(ndyrs$value)
+shapiro.test(ndyrs$value)
+
+#case
+t.test(styrs$case, ndyrs$case)
+#one tail test
+t.test(styrs$case, ndyrs$case, paired = F, alternative="greater")
+t.test(styrs$case, ndyrs$case, paired = F, alternative="less")
+
+#h
+t.test(hstyrs$sarcov, hstyrs$sarcov)
+#one tail test
+t.test(hstyrs$sarcov, hstyrs$sarcov, paired = F, alternative="greater")
+t.test(hstyrs$sarcov, hstyrs$sarcov, paired = F, alternative="less")
+
+#w
+t.test(wstyrs$sarcov, wstyrs$sarcov)
+#one tail test
+t.test(wstyrs$sarcov, wstyrs$sarcov, paired = F, alternative="greater")
+t.test(wstyrs$sarcov, wstyrs$sarcov, paired = F, alternative="less")
+
+#r
+t.test(rstyrs$sarcov, rndyrs$sarcov)
+#one tail test
+t.test(rstyrs$sarcov, rndyrs$sarcov, paired = F, alternative="greater")
+t.test(rstyrs$sarcov, rndyrs$sarcov, paired = F, alternative="less")
 
 
+###########################################################
 
 #####Omicron 339 484####
 
@@ -277,6 +435,18 @@ wilcox.test(Dry$Omi_339w, Wet$Omi_339w, alternative="less")
 wilcox.test(Dry$Omi_484w, Wet$Omi_484w)                                        
 wilcox.test(Dry$Omi_484w, Wet$Omi_484w, alternative="greater")
 wilcox.test(Dry$Omi_484w, Wet$Omi_484w, alternative="less")
+
+
+#overall
+
+summary(seasonOmi$Omi_484m)
+sd(seasonOmi$Omi_484m)
+shapiro.test(seasonOmi$Omi_484m)
+
+#Omi_339w
+summary(seasonOmi$Omi_339w)
+sd(seasonOmi$Omi_339w)
+shapiro.test(seasonOmi$Omi_339w)
 
 
 
