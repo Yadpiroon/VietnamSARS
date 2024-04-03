@@ -1,7 +1,5 @@
 # Seasonal Trends and SARS-CoV-2 Monitoring in Vietnam’s Water System with Comparative Analysis of Two-Year Case Reports
 
-Seasonal Trends and SARS-CoV-2 Monitoring in Vietnam’s Water System with Comparative Analysis of Two-Year Case Reports
-
 Yadpiroon Siria, Bikash Mallab,  Le Thanh Thaoc,d, Soichiro Hiraia, Annisa Andarini Rutia, Sunayana Rayaa, Made Sandhyana Anggaa, Niva Sthapitb, Sadhana Shresthab, Tomoko Takedae, Masaki Kitajimaf, Nguyen Quoc Dinhd,g, Pham Duc Phuch,i, Huong Thi Thuy Ngoc, d, Eiji Haramotob,*
 
 aDepartment of Engineering, University of Yamanashi, 4-3-11 Takeda, Kofu, Yamanashi 400-8511, Japan
