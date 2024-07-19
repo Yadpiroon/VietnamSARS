@@ -932,7 +932,7 @@ p4x
 
 p5x <- ggplot(graphmulti2) +           
   geom_point(aes(Omicron, date), size = 2, shape = 18, color = "red") +
-  xlab(expression(atop("Omicron_mutant", paste("(Log copies/L)", sep="")))) +
+  xlab(expression(atop("Omicron", paste("(Log copies/L)", sep="")))) +
   scale_x_continuous(position = "top", n.breaks= 4) +
   scale_y_discrete(limits = rev(levels(graphmulti2$date))) + # Set the limits to reverse the levels
   theme(
